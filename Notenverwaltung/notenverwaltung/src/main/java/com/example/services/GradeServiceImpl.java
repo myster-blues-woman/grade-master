@@ -30,7 +30,13 @@ public class GradeServiceImpl implements GradeService {
         try (Workbook workbook = new XSSFWorkbook(); FileOutputStream fileOut = new FileOutputStream(fileName)) {
             Sheet sheet = workbook.createSheet("Grades");
 
-            int rowNum = 0;
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("Modul");
+            header.createCell(1).setCellValue("Beschreibung");
+            header.createCell(2).setCellValue("Note");
+            header.createCell(3).setCellValue("Gewichtung");
+
+            int rowNum = 1;
             for (Module module : modules) {
                 for (Grade grade : module.getGrades()) {
                     Row row = sheet.createRow(rowNum++);
