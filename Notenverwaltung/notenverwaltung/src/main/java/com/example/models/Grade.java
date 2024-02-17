@@ -1,7 +1,5 @@
 package com.example.models;
 
-import java.util.UUID;
-
 public class Grade {
 
     private double grade;

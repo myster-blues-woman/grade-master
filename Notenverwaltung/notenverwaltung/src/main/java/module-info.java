@@ -12,6 +12,7 @@ module com.example {
     requires org.apache.poi.ooxml;
     requires org.apache.poi.ooxml.schemas;
 
-    opens com.example to javafx.fxml;
-    exports com.example;
+    opens com.example.Controller to javafx.fxml;
+
+    exports com.example.Controller;
 }

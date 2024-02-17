@@ -1,7 +1,6 @@
-package com.example;
+package com.example.Controller;
 
 import com.example.interfaces.ModuleRepository;
-import com.example.interfaces.ModuleService;
 import com.example.models.Grade;
 import com.example.models.Module;
 import com.example.models.Occurrence;
@@ -42,7 +41,8 @@ public class App extends Application {
         var moduleService = new ModuleServiceImpl(repo);
         var gradeService = new GradeServiceImpl(repo);
         var module = new Module("test", new ArrayList<>(), new ArrayList<>());
-        module.getOccurrences().add(new Occurrence(LocalDateTime.now(), LocalDateTime.now().plusHours(1), OccurrenceRepetition.weekly));
+        module.getOccurrences().add(
+                new Occurrence(LocalDateTime.now(), LocalDateTime.now().plusHours(1), OccurrenceRepetition.weekly));
         module.getGrades().add(new Grade(5.5, 1, "testtest"));
         moduleService.addModule(module);
 

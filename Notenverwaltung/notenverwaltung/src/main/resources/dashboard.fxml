@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
    prefHeight="609.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/19"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DashboardController">
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.DashboardController">
    <children>
       <BorderPane layoutX="-4.0" prefHeight="616.0" prefWidth="950.0">
          <left>

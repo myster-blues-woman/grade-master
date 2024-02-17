@@ -1,8 +1,9 @@
-package com.example;
+package com.example.Controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;

@@ -1,6 +1,7 @@
-package com.example;
+package com.example.Controller;
 
 import java.io.IOException;
+
 import javafx.fxml.FXML;
 
 public class DashboardController {

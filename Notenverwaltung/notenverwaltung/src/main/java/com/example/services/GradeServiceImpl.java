@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GradeServiceImpl implements GradeService {
     private final ModuleRepository moduleRepository;
@@ -55,7 +54,8 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public List<Grade> getAllGrades() {
-        return moduleRepository.loadModules().stream().map(Module::getGrades).flatMap(List::stream).collect(Collectors.toList());
+        return moduleRepository.loadModules().stream().map(Module::getGrades).flatMap(List::stream)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -66,7 +66,8 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public void removeGrade(Grade grade) {
-        Optional<Module> module = moduleRepository.loadModules().stream().filter(m -> m.getGrades().contains(grade)).findFirst();
+        Optional<Module> module = moduleRepository.loadModules().stream().filter(m -> m.getGrades().contains(grade))
+                .findFirst();
         if (module.isEmpty()) {
             System.out.println("Could not remove grade");
             return;
