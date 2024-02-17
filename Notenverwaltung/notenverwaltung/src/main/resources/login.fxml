@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+    prefHeight="456.0" prefWidth="836.0" xmlns="http://javafx.com/javafx/19"
+    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.LoginController">
+    <children>
+        <BorderPane layoutX="-4.0" layoutY="-4.0" prefHeight="462.0" prefWidth="842.0">
+            <left>
+                <Pane prefHeight="462.0" prefWidth="373.0" styleClass="linear-grad"
+                    stylesheets="@main.css" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="112.0"
+                            layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/calculator_BOLD.png" />
+                            </image>
+                        </ImageView>
+                        <Label layoutX="102.0" layoutY="295.0" prefHeight="36.0" prefWidth="202.0"
+                            text="Grade Master" textFill="WHITE">
+                            <font>
+                                <Font name="Lucida Handwriting Italic" size="22.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="149.0" layoutY="331.0" text="Note Tracking" textFill="WHITE" />
+                    </children>
+                </Pane>
+            </left>
+            <center>
+                <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="28.0" layoutY="21.0" prefHeight="200.0"
+                                    prefWidth="200.0">
+                                    <children>
+                                        <Label layoutX="73.0" layoutY="85.0" text="Anmelden">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </Pane>
+                                <TextField fx:id="signAccountName" layoutX="102.0" layoutY="161.0"
+                                    prefHeight="40.0" prefWidth="245.0" promptText="Benutzername" />
+                                <PasswordField fx:id="signInPassword" layoutX="101.0"
+                                    layoutY="231.0" prefHeight="40.0" prefWidth="245.0"
+                                    promptText="Passwort" />
+                                <Button fx:id="signInButton" layoutX="226.0" layoutY="299.0"
+                                    mnemonicParsing="false" onAction="#login" prefHeight="35.0"
+                                    prefWidth="120.0" styleClass="button1" stylesheets="@main.css"
+                                    text="Einlogen" />
+                                <Button fx:id="signInRegister" layoutX="97.0" layoutY="373.0"
+                                    mnemonicParsing="false" onAction="#switchToRegistration"
+                                    prefHeight="50.0" prefWidth="268.0" styleClass="button2"
+                                    stylesheets="@main.css"
+                                    text="Sie haben noch kein Konto? Melden Sie sich an" />
+                                <Label fx:id="signInPasswordForgot" layoutX="105.0" layoutY="308.0"
+                                    onMouseClicked="#handlePasswordForgotClick"
+                                    text="Passwort vergessen?" />
+                                <Label fx:id="loginMessageLabel" layoutX="102.0" layoutY="275.0"
+                                    text="Label" textFill="red" visible="false" />
+                            </children>
+                        </Pane>
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

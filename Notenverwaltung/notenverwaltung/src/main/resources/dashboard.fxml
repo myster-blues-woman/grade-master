@@ -11,15 +11,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+   prefHeight="609.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/19"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.DashboardController">
    <children>
       <BorderPane layoutX="-4.0" prefHeight="616.0" prefWidth="950.0">
          <left>
-            <VBox prefHeight="474.0" prefWidth="230.0" style="-fx-background-color: #6F5CC2;" stylesheets="@main.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="474.0" prefWidth="230.0" style="-fx-background-color: #6F5CC2;"
+               stylesheets="@main.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="236.0" text="Profile" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false"
+                     prefHeight="47.0" prefWidth="236.0" text="Profile" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
+                           preserveRatio="true">
                            <image>
                               <Image url="@icons/person_BOLD.png" />
                            </image>
@@ -32,9 +37,11 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="236.0" text="Studenplan" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false"
+                     prefHeight="47.0" prefWidth="236.0" text="Studenplan" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
+                           preserveRatio="true">
                            <image>
                               <Image url="@icons/calendar_BOLD.png" />
                            </image>
@@ -47,9 +54,11 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="233.0" text="Notenverwaltung" textFill="WHITE">
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false"
+                     prefHeight="47.0" prefWidth="233.0" text="Notenverwaltung" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
+                           preserveRatio="true">
                            <image>
                               <Image url="@icons/folder_BOLD.png" />
                            </image>
@@ -66,9 +75,11 @@
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="69.0" prefWidth="917.0" style="-fx-background-color: #52438F;" BorderPane.alignment="CENTER">
+            <HBox prefHeight="69.0" prefWidth="917.0" style="-fx-background-color: #52438F;"
+               BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="73.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="73.0" fitWidth="98.0" pickOnBounds="true"
+                     preserveRatio="true">
                      <image>
                         <Image url="@icons/calculator_BOLD.png" />
                      </image>
