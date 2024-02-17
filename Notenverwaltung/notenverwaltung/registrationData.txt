@@ -7,30 +7,4 @@ Lehrperson: fritz
 Benutzername: ftata
 Passwort: Test287
 --------------------------------------------------
-Name: test
-Vorname: adr
-Schule: test
-Ort der Schule: sdf
-Jahrgang: 1999
-Lehrperson: Test
-Benutzername: sfad5
-Passwort: 123
---------------------------------------------------
-Name: test
-Vorname: test
-Schule: tets
-Ort der Schule: test
-Jahrgang: 1999
-Lehrperson: test
-Benutzername: tetss
-Passwort: 123
---------------------------------------------------
-Name: test
-Vorname: test
-Schule: test
-Ort der Schule: test
-Jahrgang: 1999
-Lehrperson: test
-Benutzername: testt
-Passwort: 12345
---------------------------------------------------
+
