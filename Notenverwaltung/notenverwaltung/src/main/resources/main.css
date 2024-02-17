@@ -16,3 +16,34 @@
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px 0px 0px 3px;
 }
+
+.button1 {
+    -fx-background-color: #6F5CC2;
+    -fx-text-fill: #ffff;
+    -fx-background-radius: 20;
+}
+
+.button1:hover {
+    -fx-text-fill: #6F5CC2;
+}
+
+.button1:pressed {
+    -fx-text-fill: #371897;
+}
+
+.button2 {
+    -fx-background-color: #D5CBEB;
+    -fx-background-radius: 5;
+    -fx-text-fill: #371897;
+    -fx-border-color: #6F4CBB;
+    -fx-border-radius: 5;
+}
+
+.button2:hover {
+    -fx-text-fill: #E4EEFD;
+    -fx-background-radius: 5;
+}
+
+.linear-grad {
+    -fx-background-color: linear-gradient(to bottom left, #3c2c7e, #6F5CC2)
+}
