@@ -1,8 +1,12 @@
-package com.example;
+package com.example.Controller;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+
+import com.example.models.User;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
@@ -63,28 +67,31 @@ public class RegisterController {
             return;
         }
 
-        String content = String.format(
-                "Name: %s\nVorname: %s\nSchule: %s\nOrt der Schule: %s\nJahrgang: %s\nLehrperson: %s\nBenutzername: %s\nPasswort: %s",
-                name.getText(), vorname.getText(), schule.getText(), ortDerSchule.getText(), jahrgang.getText(),
+        int jahrgangInt = Integer.parseInt(jahrgang.getText()); // Konvertieren des Jahrgangs in int
+        User user = new User(name.getText(), vorname.getText(), schule.getText(), ortDerSchule.getText(), jahrgangInt,
                 lehrperson.getText(), userName.getText(), password.getText());
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("registrationData.txt", true))) {
-            writer.write(content);
-            writer.newLine();
-            writer.write("--------------------------------------------------");
-            writer.newLine();
+        // Konvertieren des User-Objekts in einen String, der geschrieben werden soll
+        String content = String.format(
+                "Name: %s\nVorname: %s\nSchule: %s\nOrt der Schule: %s\nJahrgang: %d\nLehrperson: %s\nBenutzername: %s\nPasswort: %s\n--------------------------------------------------\n",
+                user.getName(), user.getVorname(), user.getSchule(), user.getOrtDerSchule(), user.getJahrgang(),
+                user.getLehrperson(), user.getUserName(), user.getPassword());
 
+        // Schreiben des Inhalts in die Datei mit Streams
+        try {
+            Files.write(Paths.get("registrationData.txt"), content.getBytes(), StandardOpenOption.CREATE,
+                    StandardOpenOption.APPEND);
             // Zeige eine Benachrichtigung an, dass die Registrierung erfolgreich war
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Registrierung Erfolgreich");
-            alert.setHeaderText(null); // Kein Header wird benötigt
+            alert.setHeaderText(null);
             alert.setContentText("Sie haben sich erfolgreich registriert!");
-            alert.showAndWait(); // Zeige den Dialog und warte, bis der Benutzer ihn schließt
-
+            alert.showAndWait();
             switchToLogin();
         } catch (IOException e) {
             throw new IOException("Fehler beim Schreiben in die Datei", e);
         }
+
     }
 
     @FXML
