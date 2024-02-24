@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.interfaces.UserService;
+import com.example.services.UserServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,6 +29,12 @@ public class ResetPasswordController {
     @FXML
     private PasswordField password2;
 
+    private UserService userService;
+
+    public ResetPasswordController() {
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+    }
+
     @FXML
     private void resetPassword() throws IOException {
         if (!password.getText().equals(password2.getText())) {
@@ -33,40 +42,7 @@ public class ResetPasswordController {
             return;
         }
 
-        Path path = Paths.get("registrationData.txt");
-        List<String> lines = Files.readAllLines(path);
-        boolean isMatchingUser = false;
-        List<String> updatedLines = new ArrayList<>();
-
-        for (String line : lines) {
-            // Prüfen, ob die Zeile den Benutzernamen enthält
-            if (line.startsWith("Benutzername: ") && line.substring(14).equals(userName.getText())) {
-                isMatchingUser = true; // Beginn des Benutzerblocks
-            }
-
-            // Wenn wir uns im Block des Benutzers befinden, suchen wir nach den weiteren
-            // Kriterien
-            if (isMatchingUser && (line.startsWith("Jahrgang: ") && line.substring(10).equals(jahrgang.getText()) ||
-                    line.startsWith("Lehrperson: ") && line.substring(12).equals(lehrperson.getText()))) {
-                // Wir befinden uns im richtigen Block, aber wir ändern das Passwort erst, wenn
-                // wir die Passwortzeile erreichen
-            } else if (isMatchingUser && line.startsWith("Passwort: ")) {
-                // Passwortzeile aktualisieren
-                line = "Passwort: " + password.getText();
-                isMatchingUser = false; // Ende des Benutzerblocks
-            }
-
-            updatedLines.add(line);
-
-            // Wenn eine Trennzeile erreicht wird, beenden wir die Suche im aktuellen
-            // Benutzerblock
-            if (line.trim().equals("--------------------------------------------------")) {
-                isMatchingUser = false;
-            }
-        }
-
-        // Überschreiben der Datei mit den aktualisierten Daten
-        Files.write(path, updatedLines, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+        userService.resetPassword(userName.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(), password.getText());
 
         showAlert("Erfolg", "Passwort erfolgreich zurückgesetzt.");
     }

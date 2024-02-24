@@ -4,10 +4,11 @@ import java.util.List;
 
 public class Module {
     private String name;
+    private String username;
     private List<Occurrence> occurrences;
     private List<Grade> grades;
 
-    public Module(String name, List<Occurrence> occurrences, List<Grade> grades) {
+    public Module(String name, String username, List<Occurrence> occurrences, List<Grade> grades) {
         this.name = name;
         this.occurrences = occurrences;
         this.grades = grades;
@@ -32,4 +33,11 @@ public class Module {
         return grades;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

@@ -5,8 +5,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+import com.example.interfaces.UserService;
 import com.example.models.User;
 
+import com.example.services.UserServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
@@ -47,6 +49,12 @@ public class RegisterController {
     @FXML
     private Label jahrgangError;
 
+    private UserService userService;
+
+    public RegisterController() {
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+    }
+
     @FXML
     public void register() throws IOException {
         if (!isValidUsername(userName.getText())) {
@@ -67,31 +75,14 @@ public class RegisterController {
             return;
         }
 
-        int jahrgangInt = Integer.parseInt(jahrgang.getText()); // Konvertieren des Jahrgangs in int
-        User user = new User(name.getText(), vorname.getText(), schule.getText(), ortDerSchule.getText(), jahrgangInt,
-                lehrperson.getText(), userName.getText(), password.getText());
+        userService.register(userName.getText(), name.getText(), vorname.getText(), schule.getText(), ortDerSchule.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(), password.getText());
 
-        // Konvertieren des User-Objekts in einen String, der geschrieben werden soll
-        String content = String.format(
-                "Name: %s\nVorname: %s\nSchule: %s\nOrt der Schule: %s\nJahrgang: %d\nLehrperson: %s\nBenutzername: %s\nPasswort: %s\n--------------------------------------------------\n",
-                user.getName(), user.getVorname(), user.getSchule(), user.getOrtDerSchule(), user.getJahrgang(),
-                user.getLehrperson(), user.getUserName(), user.getPassword());
-
-        // Schreiben des Inhalts in die Datei mit Streams
-        try {
-            Files.write(Paths.get("registrationData.txt"), content.getBytes(), StandardOpenOption.CREATE,
-                    StandardOpenOption.APPEND);
-            // Zeige eine Benachrichtigung an, dass die Registrierung erfolgreich war
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Registrierung Erfolgreich");
-            alert.setHeaderText(null);
-            alert.setContentText("Sie haben sich erfolgreich registriert!");
-            alert.showAndWait();
-            switchToLogin();
-        } catch (IOException e) {
-            throw new IOException("Fehler beim Schreiben in die Datei", e);
-        }
-
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Registrierung Erfolgreich");
+        alert.setHeaderText(null);
+        alert.setContentText("Sie haben sich erfolgreich registriert!");
+        alert.showAndWait();
+        switchToLogin();
     }
 
     @FXML

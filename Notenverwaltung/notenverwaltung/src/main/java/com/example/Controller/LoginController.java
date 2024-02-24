@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.example.interfaces.UserService;
+import com.example.services.UserServiceImpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +25,12 @@ public class LoginController {
     private Label loginMessageLabel;
     @FXML
     private Button signInRegister;
+
+    private UserService userService;
+
+    public LoginController() {
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+    }
 
     @FXML
     private void switchToRegistration() throws IOException {
@@ -61,30 +69,12 @@ public class LoginController {
     }
 
     private boolean checkCredentials(String username, String password) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("registrationData.txt"))) {
-            String line;
-            String fileUsername = "";
-            String filePassword = "";
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("Benutzername: ")) {
-                    fileUsername = line.split(": ")[1].trim();
-                } else if (line.startsWith("Passwort: ")) {
-                    filePassword = line.split(": ")[1].trim();
-                }
-
-                if (!fileUsername.isEmpty() && !filePassword.isEmpty()) {
-                    if (fileUsername.equals(username) && filePassword.equals(password)) {
-                        return true;
-                    }
-                    fileUsername = "";
-                    filePassword = "";
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (userService.login(username, password))
+            return true;
+        else {
             loginMessageLabel.setText("Fehler beim Lesen der Registrierungsdaten.");
+            return false;
         }
-        return false;
     }
 
     @FXML
