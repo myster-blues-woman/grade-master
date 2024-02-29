@@ -47,4 +47,18 @@ public class UserServiceImpl implements UserService {
 
         return true;
     }
+
+    @Override
+    public boolean Update(User user) {
+        boolean removed = userRepository.loadUsers().removeIf(user1 -> user1.getUserName().equals(user.getUserName()));
+
+        if(!removed)
+            return false;
+
+        userRepository.loadUsers().add(user);
+
+        userRepository.saveUsers();
+
+        return true;
+    }
 }

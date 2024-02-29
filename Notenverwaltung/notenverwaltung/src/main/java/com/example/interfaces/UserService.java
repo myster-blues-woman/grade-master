@@ -8,4 +8,6 @@ public interface UserService {
     User register(String username, String name, String vorname, String schule, String ortDerSchule, int jahrgang, String lehrperson, String password);
 
     boolean resetPassword(String username, int jahrgang, String lehrperson, String newPassword);
+
+    boolean Update(User user);
 }
