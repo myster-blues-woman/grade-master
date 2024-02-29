@@ -10,6 +10,7 @@ public class Module {
 
     public Module(String name, String username, List<Occurrence> occurrences, List<Grade> grades) {
         this.name = name;
+        this.username = username;
         this.occurrences = occurrences;
         this.grades = grades;
     }
