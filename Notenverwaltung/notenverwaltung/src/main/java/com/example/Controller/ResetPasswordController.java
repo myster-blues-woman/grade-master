@@ -1,12 +1,6 @@
 package com.example.Controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.example.interfaces.UserService;
 import com.example.services.UserServiceImpl;
@@ -42,7 +36,8 @@ public class ResetPasswordController {
             return;
         }
 
-        userService.resetPassword(userName.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(), password.getText());
+        userService.resetPassword(userName.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(),
+                password.getText());
 
         showAlert("Erfolg", "Passwort erfolgreich zurückgesetzt.");
     }

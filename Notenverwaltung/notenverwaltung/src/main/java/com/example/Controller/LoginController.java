@@ -34,12 +34,14 @@ public class LoginController {
 
     @FXML
     private void switchToRegistration() throws IOException {
-        App.setSceneRoot("registration");
+        App.setSceneRoot("registration", 836, 456);
     }
 
     private void switchToDashboard() {
         try {
-            App.setSceneRoot("dashboard");
+            String username = signAccountName.getText();
+            String password = signInPassword.getText();
+            App.setDashboardScene(username, password);
         } catch (IOException e) {
             e.printStackTrace();
             loginMessageLabel.setText("Fehler beim Laden des Dashboards.");
@@ -48,7 +50,7 @@ public class LoginController {
 
     private void switchToResetPswd() {
         try {
-            App.setSceneRoot("resetPassword");
+            App.setSceneRoot("resetPassword", 836, 456);
         } catch (IOException e) {
             e.printStackTrace();
             loginMessageLabel.setText("Fehler beim Laden des Reset Password.");

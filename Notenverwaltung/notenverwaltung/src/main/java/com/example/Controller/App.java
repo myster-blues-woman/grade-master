@@ -40,20 +40,24 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
 
-//        ModuleRepository repo = getModuleRepositorySingleton();
-//        var moduleService = new ModuleServiceImpl(repo);
-//        var gradeService = new GradeServiceImpl(repo);
-//        var module = new Module("test", new ArrayList<>(), new ArrayList<>());
-//        module.getOccurrences().add(
-//                new Occurrence(LocalDateTime.now(), LocalDateTime.now().plusHours(1), OccurrenceRepetition.weekly));
-//        module.getGrades().add(new Grade(5.5, 1, "testtest"));
-//        moduleService.addModule(module);
-//
-//        gradeService.exportGradesToExcel("./test.xlsx");
+        // ModuleRepository repo = getModuleRepositorySingleton();
+        // var moduleService = new ModuleServiceImpl(repo);
+        // var gradeService = new GradeServiceImpl(repo);
+        // var module = new Module("test", new ArrayList<>(), new ArrayList<>());
+        // module.getOccurrences().add(
+        // new Occurrence(LocalDateTime.now(), LocalDateTime.now().plusHours(1),
+        // OccurrenceRepetition.weekly));
+        // module.getGrades().add(new Grade(5.5, 1, "testtest"));
+        // moduleService.addModule(module);
+        //
+        // gradeService.exportGradesToExcel("./test.xlsx");
     }
 
-    static void setSceneRoot(String fxml) throws IOException {
+    static void setSceneRoot(String fxml, int width, int height) throws IOException {
         scene.setRoot(loadFXML(fxml));
+        Stage stage = (Stage) scene.getWindow();
+        stage.setWidth(width);
+        stage.setHeight(height);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -73,6 +77,24 @@ public class App extends Application {
             userRepository = new UserRepositoryImpl();
 
         return userRepository;
+    }
+
+    public static void setDashboardScene(String username, String password) throws IOException {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("/dashboard.fxml"));
+        Parent root = loader.load();
+
+        DashboardController dashboardController = loader.getController();
+        dashboardController.initializeWithCredentials(username, password);
+
+        Scene scene = new Scene(root, 917, 609);
+        Stage stage = (Stage) scene.getWindow();
+        if (stage == null) {
+            stage = new Stage();
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(root);
+        }
+        stage.show();
     }
 
 }

@@ -12,7 +12,7 @@ public class User {
 
     // Konstruktor
     public User(String name, String vorname, String schule, String ortDerSchule, int jahrgang, String lehrperson,
-                String userName, String password) {
+            String userName, String password) {
         this.name = name;
         this.vorname = vorname;
         this.schule = schule;
@@ -21,6 +21,17 @@ public class User {
         this.lehrperson = lehrperson;
         this.userName = userName;
         this.password = password;
+    }
+
+    public User(String name, String vorname, String schule, String ortDerSchule, int jahrgang, String lehrperson,
+            String userName) {
+        this.name = name;
+        this.vorname = vorname;
+        this.schule = schule;
+        this.ortDerSchule = ortDerSchule;
+        this.jahrgang = jahrgang;
+        this.lehrperson = lehrperson;
+        this.userName = userName;
     }
 
     public User() {

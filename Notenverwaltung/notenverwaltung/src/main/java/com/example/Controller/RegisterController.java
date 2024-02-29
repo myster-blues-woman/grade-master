@@ -63,7 +63,7 @@ public class RegisterController {
             return;
         }
         if (!isValidJahrgang(jahrgang.getText())) {
-            jahrgangError.setText("Ungültiger Jahrgang. Muss eine Zahl zwischen 1900 und dem aktuellen Jahr sein.");
+            jahrgangError.setText("Ungültiger Jahrgang.");
             jahrgangError.setVisible(true);
             return;
         }
@@ -75,7 +75,8 @@ public class RegisterController {
             return;
         }
 
-        userService.register(userName.getText(), name.getText(), vorname.getText(), schule.getText(), ortDerSchule.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(), password.getText());
+        userService.register(userName.getText(), name.getText(), vorname.getText(), schule.getText(),
+                ortDerSchule.getText(), Integer.parseInt(jahrgang.getText()), lehrperson.getText(), password.getText());
 
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Registrierung Erfolgreich");
@@ -87,7 +88,7 @@ public class RegisterController {
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setSceneRoot("login");
+        App.setSceneRoot("login", 836, 456);
     }
 
     @FXML
