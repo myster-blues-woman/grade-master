@@ -13,4 +13,6 @@ public interface UserService {
     boolean resetPassword(String username, int jahrgang, String lehrperson, String newPassword);
 
     Optional<User> getUserByUsernameAndPassword(String username, String password);
+
+    boolean Update(User user);
 }
