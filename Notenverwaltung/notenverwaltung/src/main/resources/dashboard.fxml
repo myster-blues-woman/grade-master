@@ -13,21 +13,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-   prefHeight="609.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/19"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="609.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.DashboardController">
    <children>
       <BorderPane layoutX="-4.0" prefHeight="616.0" prefWidth="950.0">
          <left>
-            <VBox prefHeight="474.0" prefWidth="230.0" style="-fx-background-color: #6F5CC2;"
-               stylesheets="@main.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="474.0" prefWidth="230.0" style="-fx-background-color: #6F5CC2;" stylesheets="@main.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="profileNavButton" alignment="BASELINE_LEFT" graphicTextGap="10.0"
-                     mnemonicParsing="false" onAction="#onProfileNavButtonClick" prefHeight="47.0"
-                     prefWidth="236.0" text="Profile" textFill="WHITE">
+                  <Button fx:id="profileNavButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onProfileNavButtonClick" prefHeight="47.0" prefWidth="236.0" text="Profile" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
-                           preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/person_BOLD.png" />
                            </image>
@@ -40,12 +34,9 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="moduleNavButton" alignment="BASELINE_LEFT" graphicTextGap="10.0"
-                     mnemonicParsing="false" onAction="#onModuleNavButtonClick" prefHeight="47.0"
-                     prefWidth="236.0" text="Module" textFill="WHITE">
+                  <Button fx:id="moduleNavButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onModuleNavButtonClick" prefHeight="47.0" prefWidth="236.0" text="Module" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
-                           preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/calendar_BOLD.png" />
                            </image>
@@ -58,13 +49,9 @@
                         <Insets left="30.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="NotenverwaltungButton" alignment="BASELINE_LEFT"
-                     graphicTextGap="10.0" mnemonicParsing="false"
-                     onAction="#onNotenVltNavButtonClick" prefHeight="47.0" prefWidth="233.0"
-                     text="Notenverwaltung" textFill="WHITE">
+                  <Button fx:id="NotenverwaltungButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onNotenVltNavButtonClick" prefHeight="47.0" prefWidth="233.0" text="Notenverwaltung" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true"
-                           preserveRatio="true">
+                        <ImageView fitHeight="19.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/folder_BOLD.png" />
                            </image>
@@ -81,11 +68,9 @@
             </VBox>
          </left>
          <top>
-            <HBox prefHeight="60.0" prefWidth="917.0" style="-fx-background-color: #52438F;"
-               BorderPane.alignment="CENTER">
+            <HBox prefHeight="60.0" prefWidth="917.0" style="-fx-background-color: #52438F;" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="73.0" fitWidth="98.0" pickOnBounds="true"
-                     preserveRatio="true">
+                  <ImageView fitHeight="73.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icons/calculator_BOLD.png" />
                      </image>
@@ -105,14 +90,11 @@
             </HBox>
          </top>
          <center>
-            <BorderPane id="profilePane" prefHeight="200.0" prefWidth="200.0"
-               BorderPane.alignment="CENTER">
+            <BorderPane id="profilePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <top>
-                  <Pane fx:id="profileSettingsPane" prefHeight="78.0" prefWidth="720.0"
-                     style="-fx-background-color: #C0C0C0;" BorderPane.alignment="CENTER">
+                  <Pane fx:id="profileSettingsPane" prefHeight="78.0" prefWidth="720.0" style="-fx-background-color: #C0C0C0;" BorderPane.alignment="CENTER">
                      <children>
-                        <Text fx:id="profileLabel" layoutX="14.0" layoutY="44.0"
-                           strokeType="OUTSIDE" strokeWidth="0.0" text="Profileinstellungen">
+                        <Text fx:id="profileLabel" layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profileinstellungen">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -121,99 +103,63 @@
                   </Pane>
                </top>
                <center>
-                  <Pane fx:id="profilePane" prefHeight="200.0" prefWidth="200.0"
-                     style="-fx-background-color: #837E7C;" BorderPane.alignment="CENTER">
+                  <Pane fx:id="profilePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="70.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Name" wrappingWidth="47.693359375">
+                        <Text layoutX="29.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="47.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="105.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Vorname" wrappingWidth="79.693359375">
+                        <Text layoutX="29.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vorname" wrappingWidth="79.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="28.0" layoutY="222.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Schule" wrappingWidth="47.693359375">
+                        <Text layoutX="28.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schule" wrappingWidth="47.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="251.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Jahrgang" wrappingWidth="63.693359375">
+                        <Text layoutX="29.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jahrgang" wrappingWidth="63.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="287.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Lehrperson" wrappingWidth="70.693359375">
+                        <Text layoutX="29.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lehrperson" wrappingWidth="70.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="27.0" layoutY="134.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Benutzername" wrappingWidth="101.693359375">
+                        <Text layoutX="27.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Benutzername" wrappingWidth="101.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="29.0" layoutY="322.0" strokeType="OUTSIDE"
-                           strokeWidth="0.0" text="Ort der Schule" wrappingWidth="92.693359375">
+                        <Text layoutX="29.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ort der Schule" wrappingWidth="92.693359375">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="28.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                           text="Profildetails" wrappingWidth="92.693359375">
+                        <Text layoutX="28.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Profildetails" wrappingWidth="92.693359375">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Text>
-                        <Text layoutX="28.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                           text="Schulinformationen" wrappingWidth="148.693359375">
+                        <Text layoutX="28.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Schulinformationen" wrappingWidth="148.693359375">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="name" layoutX="193.0" layoutY="53.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="vorname" layoutX="193.0" layoutY="87.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="userName" layoutX="193.0" layoutY="119.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="schule" layoutX="193.0" layoutY="204.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="jahrgang" layoutX="193.0" layoutY="235.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="lehrperson" layoutX="193.0" layoutY="268.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <TextField fx:id="ortDerSchule" layoutX="193.0" layoutY="301.0"
-                           onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0"
-                           prefWidth="172.0"
-                           style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
-                        <Button fx:id="deleteButton" layoutX="494.0" layoutY="68.0"
-                           mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0"
-                           prefWidth="125.0" style="-fx-background-color: red;" styleClass="button1"
-                           stylesheets="@main.css" text="Löschen" textFill="WHITE" />
-                        <Button disable="true" layoutX="495.0" layoutY="108.0"
-                           mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0"
-                           styleClass="button1" stylesheets="@main.css" text="Speichern"
-                           textFill="WHITE" />
+
+                        <TextField fx:id="name" layoutX="193.0" layoutY="53.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="vorname" layoutX="193.0" layoutY="87.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="userName" layoutX="193.0" layoutY="119.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="schule" layoutX="193.0" layoutY="204.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="jahrgang" layoutX="193.0" layoutY="235.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="lehrperson" layoutX="193.0" layoutY="268.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <TextField fx:id="ortDerSchule" layoutX="193.0" layoutY="301.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
+                        <Button fx:id="deleteButton" layoutX="494.0" layoutY="68.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: red;" styleClass="button1" stylesheets="@main.css" text="Löschen" textFill="WHITE" />
+                        <Button disable="true" layoutX="495.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="button1" stylesheets="@main.css" text="Speichern" textFill="WHITE" />
                      </children>
                   </Pane>
                </center>

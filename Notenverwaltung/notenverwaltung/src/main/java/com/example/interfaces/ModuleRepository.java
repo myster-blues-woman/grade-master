@@ -8,5 +8,8 @@ public interface ModuleRepository {
     List<Module> loadModules();
 
     void saveModules(List<Module> modules);
+
     void saveModules();
+
+    List<Module> deleteModule(String name);
 }

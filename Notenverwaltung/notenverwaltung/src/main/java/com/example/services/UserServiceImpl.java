@@ -9,15 +9,25 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    private AuthenticatedUserAccessorImpl authenticatedUserAccessorImpl;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, AuthenticatedUserAccessorImpl authenticatedUserAccessorImpl) {
         this.userRepository = userRepository;
+        this.authenticatedUserAccessorImpl = authenticatedUserAccessorImpl;
     }
 
     @Override
     public boolean login(String username, String password) {
-        return userRepository.loadUsers().stream()
-                .anyMatch(user -> username.equals(user.getUserName()) && password.equals(user.getPassword()));
+        Optional<User> userOptional = userRepository.loadUsers().stream()
+                .filter(user -> username.equals(user.getUserName()) && password.equals(user.getPassword()))
+                .findFirst();
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            authenticatedUserAccessorImpl.setAuthenticatedUser(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -62,7 +72,7 @@ public class UserServiceImpl implements UserService {
     public boolean Update(User user) {
         boolean removed = userRepository.loadUsers().removeIf(user1 -> user1.getUserName().equals(user.getUserName()));
 
-        if(!removed)
+        if (!removed)
             return false;
 
         userRepository.loadUsers().add(user);

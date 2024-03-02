@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +89,8 @@ public class GradeServiceImplTest {
         // Arrange
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt", "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        List<Module> modules = List.of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(6, 1, "test"))));
+        List<Module> modules = List
+                .of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(6, 1, "test")), LocalDate.now()));
         moduleRepository.saveModules(modules);
 
         // Act
@@ -104,7 +106,9 @@ public class GradeServiceImplTest {
         // Arrange
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt", "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        List<Module> modules = List.of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(5.0, 1.0, "Test"))));
+        List<Module> modules = List
+                .of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(5.0, 1.0, "Test")),
+                        LocalDate.now()));
         moduleRepository.saveModules(modules);
 
         // Act
@@ -121,7 +125,7 @@ public class GradeServiceImplTest {
         // Arrange
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt", "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>());
+        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(module);
         moduleRepository.saveModules(modules);
@@ -141,7 +145,8 @@ public class GradeServiceImplTest {
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt", "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
         Grade grade = new Grade(5.5, 1.0, "test");
-        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>(List.of(grade)));
+        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>(List.of(grade)),
+                LocalDate.now());
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(module);
         moduleRepository.saveModules(modules);

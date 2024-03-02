@@ -26,7 +26,8 @@ public class ResetPasswordController {
     private UserService userService;
 
     public ResetPasswordController() {
-        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton(),
+                App.getAuthenticatedUserAccessorSingleton());
     }
 
     @FXML

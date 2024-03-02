@@ -1,7 +1,5 @@
 package com.example.Controller;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 import com.example.interfaces.UserService;
@@ -29,7 +27,8 @@ public class LoginController {
     private UserService userService;
 
     public LoginController() {
-        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton(),
+                App.getAuthenticatedUserAccessorSingleton());
     }
 
     @FXML
@@ -39,9 +38,7 @@ public class LoginController {
 
     private void switchToDashboard() {
         try {
-            String username = signAccountName.getText();
-            String password = signInPassword.getText();
-            App.setDashboardScene(username, password);
+            App.setSceneRoot("dashboard", 917, 609);
         } catch (IOException e) {
             e.printStackTrace();
             loginMessageLabel.setText("Fehler beim Laden des Dashboards.");

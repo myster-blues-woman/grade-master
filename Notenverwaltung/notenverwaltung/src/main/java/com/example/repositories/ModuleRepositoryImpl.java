@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ModuleRepositoryImpl implements ModuleRepository {
@@ -51,7 +52,7 @@ public class ModuleRepositoryImpl implements ModuleRepository {
                 return null;
             }
         }
-
+        tainted = false;
         return modules;
     }
 
@@ -73,5 +74,21 @@ public class ModuleRepositoryImpl implements ModuleRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Module> deleteModule(String moduleName) {
+        List<Module> currentModules = loadModules();
+        if (currentModules == null) {
+            return Collections.emptyList();
+        }
+        boolean removed = currentModules.removeIf(module -> module.getName().equals(moduleName));
+
+        if (removed) {
+            saveModules(currentModules);
+            tainted = true;
+        }
+        System.out.println(currentModules);
+        return currentModules;
     }
 }

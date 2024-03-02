@@ -52,7 +52,8 @@ public class RegisterController {
     private UserService userService;
 
     public RegisterController() {
-        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton(),
+                App.getAuthenticatedUserAccessorSingleton());
     }
 
     @FXML

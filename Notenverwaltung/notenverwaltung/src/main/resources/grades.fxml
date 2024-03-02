@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="1049.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.GradeController">
+    <children>
+        <BorderPane prefHeight="594.0" prefWidth="1049.0" style="-fx-background-color: #6F5CC2;">
+            <center>
+                <BorderPane prefHeight="584.0" prefWidth="518.0" style="-fx-background-color: #FBFCFC; -fx-background-radius: 1em;" BorderPane.alignment="CENTER">
+                    <top>
+                        <Pane prefHeight="125.0" prefWidth="542.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Schuljahr">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblGreeting1" layoutX="45.0" layoutY="71.0" text="Some lorem ipsum and add you description here" textFill="#989aad" />
+                            </children>
+                        </Pane>
+                    </top>
+                    <center>
+                        <BorderPane prefHeight="274.0" prefWidth="542.0" BorderPane.alignment="CENTER">
+                            <center>
+                                <ScrollPane prefHeight="395.0" prefWidth="542.0" style="-fx-border-color: #FBFCFC;">
+                                    <content>
+                                        <VBox fx:id="laufendeVBox" alignment="TOP_CENTER" prefHeight="419.0" prefWidth="525.0" style="-fx-background-color: #FBFCFC;">
+                                            <padding>
+                                                <Insets bottom="10.0" top="10.0" />
+                                            </padding>
+                                        </VBox>
+                                    </content>
+                                </ScrollPane>
+                            </center>
+                            <top>
+                                <Label fx:id="lblToday" prefHeight="40.0" prefWidth="113.0" text="Laufende" BorderPane.alignment="CENTER_LEFT">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="10.0" left="45.0" top="10.0" />
+                                    </padding>
+                                </Label>
+                            </top>
+                        </BorderPane>
+                    </center>
+                </BorderPane>
+            </center>
+            <left>
+                <Pane prefHeight="509.0" prefWidth="497.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TextField fx:id="gradeTextFeld" layoutX="82.0" layoutY="284.0" prefHeight="34.0" prefWidth="116.0" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                        </TextField>
+                        <Label fx:id="lblName" layoutX="86.0" layoutY="60.0" text="Notenverwaltung" textFill="#fbfcfc">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblGreeting" layoutX="86.0" layoutY="260.0" text="Note" textFill="#989aad" />
+                        <Button fx:id="addGradeButton" layoutX="79.0" layoutY="345.0" mnemonicParsing="false" onAction="#addGrade" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: green;" styleClass="button1" stylesheets="@main.css" text="Hinzufügen" textFill="WHITE" />
+                        <ComboBox fx:id="comboBoxModule" layoutX="86.0" layoutY="150.0" prefWidth="150.0" />
+                        <Label fx:id="lblGreeting2" layoutX="86.0" layoutY="122.0" text="Wähle das entsprechende Modul" textFill="#989aad" />
+                        <TextField fx:id="weightTextField" layoutX="225.0" layoutY="284.0" prefHeight="34.0" prefWidth="118.0" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                        </TextField>
+                        <Label fx:id="lblGreeting3" layoutX="232.0" layoutY="259.0" text="Gewichtung" textFill="#989aad" />
+                  <TextField fx:id="gradeDescriptionTextField" layoutX="83.0" layoutY="218.0" prefHeight="34.0" prefWidth="260.0" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </TextField>
+                  <Label fx:id="lblGreeting4" layoutX="88.0" layoutY="194.0" text="Beschreibung" textFill="#989aad" />
+                    </children>
+                </Pane>
+            </left>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </BorderPane>
+    </children>
+</AnchorPane>

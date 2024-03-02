@@ -1,5 +1,6 @@
 package com.example.Controller;
 
+import com.example.interfaces.AuthenticatedUserAccessor;
 import com.example.interfaces.ModuleRepository;
 import com.example.interfaces.UserRepository;
 import com.example.models.Grade;
@@ -8,6 +9,7 @@ import com.example.models.Occurrence;
 import com.example.models.OccurrenceRepetition;
 import com.example.repositories.ModuleRepositoryImpl;
 import com.example.repositories.UserRepositoryImpl;
+import com.example.services.AuthenticatedUserAccessorImpl;
 import com.example.services.GradeServiceImpl;
 import com.example.services.ModuleServiceImpl;
 import javafx.application.Application;
@@ -17,8 +19,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * JavaFX App
@@ -28,6 +28,7 @@ public class App extends Application {
     private static Scene scene;
     private static ModuleRepository moduleRepository;
     private static UserRepository userRepository;
+    private static AuthenticatedUserAccessorImpl authenticatedUserAccessor;
 
     public static void main(String[] args) {
         launch();
@@ -79,22 +80,10 @@ public class App extends Application {
         return userRepository;
     }
 
-    public static void setDashboardScene(String username, String password) throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("/dashboard.fxml"));
-        Parent root = loader.load();
+    public static AuthenticatedUserAccessorImpl getAuthenticatedUserAccessorSingleton() {
+        if (authenticatedUserAccessor == null)
+            authenticatedUserAccessor = new AuthenticatedUserAccessorImpl();
 
-        DashboardController dashboardController = loader.getController();
-        dashboardController.initializeWithCredentials(username, password);
-
-        Scene scene = new Scene(root, 917, 609);
-        Stage stage = (Stage) scene.getWindow();
-        if (stage == null) {
-            stage = new Stage();
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(root);
-        }
-        stage.show();
+        return authenticatedUserAccessor;
     }
-
 }
