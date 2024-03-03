@@ -1,13 +1,18 @@
 package com.example.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.interfaces.GradeService;
+import com.example.interfaces.ModuleService;
 import com.example.models.Grade;
 import com.example.models.Module;
 
 import com.example.exceptions.UnauthorizedException;
+import com.example.services.GradeServiceImpl;
 import com.example.services.ModuleServiceImpl;
 
 import javafx.event.ActionEvent;
@@ -38,12 +43,17 @@ public class GradeController {
     private ComboBox comboBoxModule;
     @FXML
     private Label dropDownError;
+    @FXML
+    private Button exportButton;
 
-    private ModuleServiceImpl moduleService;
+    private ModuleService moduleService;
+    private GradeService gradeService;
 
     public GradeController() {
         this.moduleService = new ModuleServiceImpl(App.getModuleRepositorySingleton(),
                 App.getAuthenticatedUserAccessorSingleton());
+
+        this.gradeService = new GradeServiceImpl(App.getModuleRepositorySingleton(), App.getAuthenticatedUserAccessorSingleton());
     }
 
     @FXML
@@ -138,6 +148,19 @@ public class GradeController {
     @FXML
     private void onSwitchToDashboardClick() {
         switchToDashboard();
+    }
+
+    @FXML
+    private void onExportGrades() {
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = localDate.format(formatter);
+
+        try {
+            gradeService.exportGradesToExcel("grade_export_" + formattedDate + ".xlsx");
+        } catch (UnauthorizedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
