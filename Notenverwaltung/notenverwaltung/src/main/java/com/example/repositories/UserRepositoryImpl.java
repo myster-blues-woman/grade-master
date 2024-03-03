@@ -1,7 +1,6 @@
 package com.example.repositories;
 
 import com.example.interfaces.UserRepository;
-import com.example.models.Module;
 import com.example.models.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,20 +75,33 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void updateUser(String originalUsername, User updatedUser) {
-        List<User> users = loadUsers(); // Lade die existierenden Benutzer
+        List<User> users = loadUsers();
 
+        int userIndex = -1;
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
             if (user.getUserName().equals(originalUsername)) {
-                // Aktualisiere den Benutzer mit den neuen Daten
-                users.set(i, updatedUser);
-                tainted = true;
-                break; // Beende die Schleife, nachdem der Benutzer gefunden und aktualisiert wurde
+                userIndex = i;
+                break;
             }
         }
-        System.out.println("Im Repository: Benutzer aktualisiert.");
-        if (tainted) {
-            saveUsers(); // Speichere die aktualisierte Liste von Benutzern
+
+        if (userIndex != -1) {
+            if (!originalUsername.equals(updatedUser.getUserName())) {
+                for (User user : users) {
+                    if (user.getUserName().equals(updatedUser.getUserName())) {
+                        System.out.println("Ein anderer Benutzer mit dem Benutzernamen " + updatedUser.getUserName()
+                                + " existiert bereits.");
+                        return;
+                    }
+                }
+            }
+            users.set(userIndex, updatedUser);
+            tainted = true;
+            System.out.println("Im Repository: Benutzer aktualisiert.");
+            saveUsers();
+        } else {
+            System.out.println("Kein Benutzer mit dem Benutzernamen " + originalUsername + " gefunden.");
         }
     }
 

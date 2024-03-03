@@ -61,7 +61,6 @@ public class DashboardController implements Initializable {
         saveButton.setDisable(true);
         currentUser = authenticatedUserAccessor.getAuthenticatedUser();
         if (currentUser != null) {
-            System.out.println(currentUser);
             name.setText(currentUser.getName());
             vorname.setText(currentUser.getVorname());
             schule.setText(currentUser.getSchule());
@@ -161,7 +160,6 @@ public class DashboardController implements Initializable {
         updatedUser.setPassword(currentUser.getPassword());
         try {
             if (userService.update(currentUser.getUserName(), updatedUser)) {
-                System.out.println("Benutzerdaten erfolgreich aktualisiert.");
                 showAlert("Erfolg", "Benutzerdaten erfolgreich aktualisiert.", Alert.AlertType.INFORMATION);
                 saveButton.setDisable(true); // Deaktiviere den Speichern-Button nach erfolgreicher Aktualisierung
             } else {
@@ -169,7 +167,6 @@ public class DashboardController implements Initializable {
             }
             saveButton.setDisable(true);
         } catch (Exception e) {
-            System.err.println("Fehler beim Aktualisieren der Benutzerdaten: " + e.getMessage());
             showAlert("Fehler", "Fehler beim Aktualisieren der Benutzerdaten: " + e.getMessage(),
                     Alert.AlertType.ERROR);
         }

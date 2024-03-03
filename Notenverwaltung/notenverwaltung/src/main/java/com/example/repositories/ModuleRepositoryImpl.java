@@ -88,7 +88,6 @@ public class ModuleRepositoryImpl implements ModuleRepository {
             saveModules(currentModules);
             tainted = true;
         }
-        System.out.println(currentModules);
         return currentModules;
     }
 }
