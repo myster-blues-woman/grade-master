@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 
 public class ResetPasswordController {
@@ -22,6 +23,8 @@ public class ResetPasswordController {
     private PasswordField password;
     @FXML
     private PasswordField password2;
+    @FXML
+    private Button backToLoginButton;
 
     private UserService userService;
 
@@ -49,5 +52,10 @@ public class ResetPasswordController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void onBackToLoginClick() throws IOException {
+        App.setSceneRoot("login", 836, 460);
     }
 }
