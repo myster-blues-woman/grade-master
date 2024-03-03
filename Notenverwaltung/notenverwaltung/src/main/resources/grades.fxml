@@ -20,12 +20,13 @@
                     <top>
                         <Pane prefHeight="125.0" prefWidth="542.0" BorderPane.alignment="CENTER">
                             <children>
-                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Schuljahr">
+                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Module und Noten">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblGreeting1" layoutX="45.0" layoutY="71.0" text="Some lorem ipsum and add you description here" textFill="#989aad" />
+                                <Label fx:id="lblGreeting1" layoutX="45.0" layoutY="71.0" text="Hier werden deine Noten mit Module durchschnitt angezeigt" textFill="#989aad" />
+                        <Button fx:id="exportButton" layoutX="394.0" layoutY="90.0" mnemonicParsing="false" onAction="#onExportGrades" prefHeight="27.0" prefWidth="111.0" styleClass="button2" stylesheets="@main.css" text="Export" />
                             </children>
                         </Pane>
                     </top>
@@ -71,7 +72,7 @@
                         </Label>
                         <Label fx:id="lblGreeting" layoutX="86.0" layoutY="260.0" text="Note" textFill="#989aad" />
                         <Button fx:id="addGradeButton" layoutX="79.0" layoutY="345.0" mnemonicParsing="false" onAction="#addGrade" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: green;" styleClass="button1" stylesheets="@main.css" text="Hinzufügen" textFill="WHITE" />
-                        <ComboBox fx:id="comboBoxModule" layoutX="86.0" layoutY="150.0" prefWidth="150.0" />
+                        <ComboBox fx:id="comboBoxModule" layoutX="86.0" layoutY="150.0" prefHeight="25.0" prefWidth="254.0" />
                         <Label fx:id="lblGreeting2" layoutX="86.0" layoutY="122.0" text="Wähle das entsprechende Modul" textFill="#989aad" />
                         <TextField fx:id="weightTextField" layoutX="225.0" layoutY="284.0" prefHeight="34.0" prefWidth="118.0" style="-fx-background-color: #989AAD; -fx-background-radius: 1em;" styleClass="text-input">
                             <padding>
@@ -85,6 +86,8 @@
                      </padding>
                   </TextField>
                   <Label fx:id="lblGreeting4" layoutX="88.0" layoutY="194.0" text="Beschreibung" textFill="#989aad" />
+                  <Button fx:id="backToDashboardButton" layoutX="79.0" layoutY="385.0" mnemonicParsing="false" onAction="#onSwitchToDashboardClick" prefHeight="25.0" prefWidth="125.0" styleClass="button2" stylesheets="@main.css" text="zurück" textFill="WHITE" />
+                  <Label fx:id="dropDownError" layoutX="85.0" layoutY="176.0" text="Label" textFill="RED" />
                     </children>
                 </Pane>
             </left>
