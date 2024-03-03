@@ -1,7 +1,6 @@
 package com.example.repositories;
 
 import com.example.interfaces.UserRepository;
-import com.example.models.Module;
 import com.example.models.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -73,4 +72,37 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateUser(String originalUsername, User updatedUser) {
+        List<User> users = loadUsers();
+
+        int userIndex = -1;
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUserName().equals(originalUsername)) {
+                userIndex = i;
+                break;
+            }
+        }
+
+        if (userIndex != -1) {
+            if (!originalUsername.equals(updatedUser.getUserName())) {
+                for (User user : users) {
+                    if (user.getUserName().equals(updatedUser.getUserName())) {
+                        System.out.println("Ein anderer Benutzer mit dem Benutzernamen " + updatedUser.getUserName()
+                                + " existiert bereits.");
+                        return;
+                    }
+                }
+            }
+            users.set(userIndex, updatedUser);
+            tainted = true;
+            System.out.println("Im Repository: Benutzer aktualisiert.");
+            saveUsers();
+        } else {
+            System.out.println("Kein Benutzer mit dem Benutzernamen " + originalUsername + " gefunden.");
+        }
+    }
+
 }

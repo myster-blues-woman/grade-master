@@ -1,18 +1,23 @@
 package com.example.Controller;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
+import java.net.URL;
 
 import com.example.interfaces.AuthenticatedUserAccessor;
+import com.example.interfaces.UserService;
 import com.example.models.User;
-import com.example.services.AuthenticatedUserAccessorImpl;
+import com.example.services.UserServiceImpl;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class DashboardController {
+public class DashboardController implements Initializable {
     @FXML
     private Pane profilePane;
 
@@ -36,20 +41,26 @@ public class DashboardController {
     private Button deleteButton;
     @FXML
     private Text profileLabel;
+    @FXML
+    private Button resetPasswort;
 
     private AuthenticatedUserAccessor authenticatedUserAccessor;
+    private UserService userService;
 
     private User currentUser;
 
     public DashboardController() {
         this.authenticatedUserAccessor = App.getAuthenticatedUserAccessorSingleton();
+        this.userService = new UserServiceImpl(App.getUserRepositorySingleton(),
+                App.getAuthenticatedUserAccessorSingleton());
+
     }
 
-    @FXML
-    private void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        saveButton.setDisable(true);
         currentUser = authenticatedUserAccessor.getAuthenticatedUser();
         if (currentUser != null) {
-            System.out.println(currentUser);
             name.setText(currentUser.getName());
             vorname.setText(currentUser.getVorname());
             schule.setText(currentUser.getSchule());
@@ -58,6 +69,19 @@ public class DashboardController {
             lehrperson.setText(currentUser.getLehrperson());
             userName.setText(currentUser.getUserName());
         }
+
+        // Listener hinzufügen
+        addTextChangeListeners();
+    }
+
+    private void addTextChangeListeners() {
+        name.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        vorname.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        schule.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        ortDerSchule.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        jahrgang.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        lehrperson.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
+        userName.textProperty().addListener((observable, oldValue, newValue) -> checkForChanges());
     }
 
     @FXML
@@ -92,7 +116,6 @@ public class DashboardController {
     }
 
     private void checkForChanges() {
-        // Überprüfe, ob Änderungen an den Textfeldern vorgenommen wurden
         boolean changesMade = !name.getText().equals(currentUser.getName()) ||
                 !vorname.getText().equals(currentUser.getVorname()) ||
                 !schule.getText().equals(currentUser.getSchule()) ||
@@ -100,14 +123,94 @@ public class DashboardController {
                 !jahrgang.getText().equals(String.valueOf(currentUser.getJahrgang())) ||
                 !lehrperson.getText().equals(currentUser.getLehrperson()) ||
                 !userName.getText().equals(currentUser.getUserName());
+        saveButton.setDisable(!changesMade);
+    }
 
-        // Wenn Änderungen vorhanden sind, mache den Speichern-Button sichtbar, sonst
-        // unsichtbar
-        saveButton.setDisable(changesMade);
+    @FXML
+    private void onSaveButtonClick() {
+        String updatedName = name.getText();
+        String updatedVorname = vorname.getText();
+        String updatedSchule = schule.getText();
+        String updatedOrtDerSchule = ortDerSchule.getText();
+        String updatedLehrperson = lehrperson.getText();
+        String updatedUserName = userName.getText();
+        String updatedJahrgang = jahrgang.getText();
+        User updatedUser = new User();
+
+        if (!isValidUsername(updatedUserName)) {
+            showAlert("Validierungsfehler", "Benutzername muss mindestens 5 Zeichen lang sein.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validierung des Jahrgangs
+        if (!isValidJahrgang(updatedJahrgang)) {
+            showAlert("Validierungsfehler",
+                    "Jahrgang muss eine gültige Zahl zwischen 1901 und dem aktuellen Jahr sein.",
+                    Alert.AlertType.ERROR);
+            return;
+        }
+        int updatedJahrgangToInt = Integer.parseInt(updatedJahrgang);
+        updatedUser.setName(updatedName);
+        updatedUser.setVorname(updatedVorname);
+        updatedUser.setSchule(updatedSchule);
+        updatedUser.setOrtDerSchule(updatedOrtDerSchule);
+        updatedUser.setJahrgang(updatedJahrgangToInt);
+        updatedUser.setLehrperson(updatedLehrperson);
+        updatedUser.setUserName(updatedUserName);
+        updatedUser.setPassword(currentUser.getPassword());
+        try {
+            if (userService.update(currentUser.getUserName(), updatedUser)) {
+                showAlert("Erfolg", "Benutzerdaten erfolgreich aktualisiert.", Alert.AlertType.INFORMATION);
+                saveButton.setDisable(true); // Deaktiviere den Speichern-Button nach erfolgreicher Aktualisierung
+            } else {
+                showAlert("Fehler", "Benutzer konnte nicht gefunden oder aktualisiert werden.", Alert.AlertType.ERROR);
+            }
+            saveButton.setDisable(true);
+        } catch (Exception e) {
+            showAlert("Fehler", "Fehler beim Aktualisieren der Benutzerdaten: " + e.getMessage(),
+                    Alert.AlertType.ERROR);
+        }
+
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private boolean isValidUsername(String username) {
+        // Beispiel: Benutzername muss mindestens 5 Zeichen lang sein
+        return username != null && !username.trim().isEmpty() && username.length() >= 5;
+    }
+
+    private boolean isValidJahrgang(String jahrgang) {
+        // Beispiel: Jahrgang muss eine Zahl sein und ein realistisches Jahr darstellen
+        try {
+            int jahr = Integer.parseInt(jahrgang);
+            return jahr > 1900 && jahr <= java.time.Year.now().getValue();
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void switchToResetPswd() {
+        try {
+            App.setSceneRoot("resetPassword", 836, 456);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void handleTextFieldChange() {
         checkForChanges();
+    }
+
+    @FXML
+    private void onResetPasswortClick() {
+        switchToResetPswd();
     }
 }

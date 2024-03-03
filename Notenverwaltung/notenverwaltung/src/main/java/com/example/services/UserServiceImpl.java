@@ -69,16 +69,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean Update(User user) {
-        boolean removed = userRepository.loadUsers().removeIf(user1 -> user1.getUserName().equals(user.getUserName()));
+    public boolean update(String originalUsername, User updatedUser) {
+        Optional<User> existingUser = userRepository.loadUsers().stream()
+                .filter(user -> user.getUserName().equals(originalUsername))
+                .findFirst();
 
-        if (!removed)
+        if (existingUser.isPresent()) {
+            System.out.println("im service");
+            userRepository.updateUser(originalUsername, updatedUser);
+            return true;
+        } else {
             return false;
-
-        userRepository.loadUsers().add(user);
-
-        userRepository.saveUsers();
-
-        return true;
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.example.interfaces.ModuleRepository;
 import com.example.models.Module;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class InMemoryModuleRepository implements ModuleRepository {
@@ -17,7 +18,9 @@ public class InMemoryModuleRepository implements ModuleRepository {
 
     @Override
     public void saveModules(List<Module> modules) {
-        this.modules = modules;
+        // Stellt sicher, dass `this.modules` eine neue Instanz von ArrayList ist,
+        // die die übergebenen Module enthält.
+        this.modules = new ArrayList<>(modules);
     }
 
     @Override
@@ -26,8 +29,16 @@ public class InMemoryModuleRepository implements ModuleRepository {
     }
 
     @Override
-    public List<Module> deleteModule(String name) {
-        return modules;
-        // Do nothingg
+    public List<Module> deleteModule(String moduleName) {
+        List<Module> mutableModules = new ArrayList<>(loadModules());
+
+        boolean removed = mutableModules.removeIf(module -> module.getName().equals(moduleName));
+
+        if (removed) {
+            saveModules(mutableModules);
+        }
+
+        return mutableModules;
     }
+
 }

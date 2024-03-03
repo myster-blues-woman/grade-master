@@ -87,4 +87,49 @@ class ModuleServiceImplTest {
         assertFalse(modules.isEmpty());
         assertEquals("OOP1", modules.get(0).getName());
     }
+
+    @Test
+    void givenAuthenticatedAndModuleExists_whenDeleteModule_thenModuleIsDeleted() throws UnauthorizedException {
+        // Arrange
+        String userName = "peter";
+        User user = new User(userName, "Müller", "HFTM", "Grenchen", 2000, "Kurt", userName, "1234");
+        authenticatedUserAccessor.setAuthenticatedUser(user);
+
+        Module module1 = new Module("OOP1", userName, new ArrayList<>(), new ArrayList<>(),
+                LocalDate.now().minusDays(1));
+        Module module2 = new Module("OOP2", userName, new ArrayList<>(), new ArrayList<>(), LocalDate.now());
+        moduleRepository.saveModules(List.of(module1, module2));
+
+        assertEquals(2, moduleService.getAllModules().size());
+
+        // Act
+        moduleService.deleteModule(userName, "OOP1");
+
+        // Assert
+        List<Module> remainingModules = moduleService.getAllModules();
+        assertEquals(1, remainingModules.size());
+        assertEquals("OOP2", remainingModules.get(0).getName());
+    }
+
+    @Test
+    void givenAuthenticatedAndModuleDoesNotExist_whenDeleteModule_thenNoChange() throws UnauthorizedException {
+        // Arrange
+        String userName = "peter";
+        User user = new User(userName, "Müller", "HFTM", "Grenchen", 2000, "Kurt", userName, "1234");
+        authenticatedUserAccessor.setAuthenticatedUser(user);
+
+        Module module = new Module("OOP1", userName, new ArrayList<>(), new ArrayList<>(),
+                LocalDate.now().minusDays(1));
+        moduleRepository.saveModules(List.of(module));
+
+        assertEquals(1, moduleService.getAllModules().size());
+
+        // Act
+        moduleService.deleteModule(userName, "NichtExistierendesModul");
+
+        // Assert
+        List<Module> remainingModules = moduleService.getAllModules();
+        assertEquals(1, remainingModules.size());
+    }
+
 }

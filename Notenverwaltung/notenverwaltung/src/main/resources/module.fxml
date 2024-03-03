@@ -20,12 +20,12 @@
                     <top>
                         <Pane prefHeight="125.0" prefWidth="542.0" BorderPane.alignment="CENTER">
                             <children>
-                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Schuljahr">
+                                <Label fx:id="lblName1" layoutX="45.0" layoutY="37.0" text="Module">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblGreeting1" layoutX="45.0" layoutY="71.0" text="Some lorem ipsum and add you description here" textFill="#989aad" />
+                                <Label fx:id="lblGreeting1" layoutX="45.0" layoutY="71.0" text="Hier werden die Module aufgelistet" textFill="#989aad" />
                             </children>
                         </Pane>
                     </top>
@@ -94,6 +94,7 @@
                         <Button fx:id="addModuleButton" layoutX="93.0" layoutY="267.0" mnemonicParsing="false" onAction="#addModule" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: green;" styleClass="button1" stylesheets="@main.css" text="Hinzufügen" textFill="WHITE" />
                   <DatePicker fx:id="datePicker" layoutX="94.0" layoutY="227.0" prefHeight="25.0" prefWidth="189.0" style="-fx-background-color: #989AAD;" />
                   <Label fx:id="lblGreeting2" layoutX="94.0" layoutY="201.0" text="Start Module" textFill="#989aad" />
+                  <Button fx:id="backToDashboardButton" layoutX="93.0" layoutY="305.0" mnemonicParsing="false" onAction="#onSwitchToDashboardClick" prefHeight="25.0" prefWidth="125.0" styleClass="button2" stylesheets="@main.css" text="zurück" textFill="WHITE" />
                     </children>
                 </Pane>
             </left>
