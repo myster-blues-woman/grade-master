@@ -22,10 +22,6 @@ public class ModuleItemController {
 
     private Consumer<Module> onDelete;
 
-    public ModuleItemController() {
-
-    }
-
     public void initModule(Module module, Consumer<Module> onDelete) {
         this.module = module;
         this.onDelete = onDelete;

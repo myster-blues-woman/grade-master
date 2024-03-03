@@ -8,5 +8,8 @@ public interface UserRepository {
     List<User> loadUsers();
 
     void saveUsers(List<User> users);
+
     void saveUsers();
+
+    void updateUser(String originalUsername, User updatedUser);
 }

@@ -30,6 +30,8 @@ public class ModuleController {
     private Button addModuleButton;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private Button backToDashboardButton;
 
     private ModuleServiceImpl moduleService;
 
@@ -75,7 +77,6 @@ public class ModuleController {
     @FXML
     private void addModule(ActionEvent event) {
         LocalDate moduleDate = datePicker.getValue();
-        LocalDate today = LocalDate.now();
 
         try {
 
@@ -89,5 +90,18 @@ public class ModuleController {
         } catch (UnauthorizedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void switchToDashboard() {
+        try {
+            App.setSceneRoot("dashboard", 941, 620);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSwitchToDashboardClick() {
+        switchToDashboard();
     }
 }

@@ -23,4 +23,17 @@ public class InMemoryUserRepository implements UserRepository {
     public void saveUsers() {
         // Do nothing
     }
+
+    @Override
+    public void updateUser(String originalUsername, User updatedUser) {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUserName().equals(originalUsername)) {
+                users.set(i, updatedUser);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("User with username " + originalUsername + " not found");
+    }
+
 }

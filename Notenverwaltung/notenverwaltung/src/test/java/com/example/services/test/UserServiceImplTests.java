@@ -1,6 +1,5 @@
 package com.example.services.test;
 
-import com.example.interfaces.AuthenticatedUserAccessor;
 import com.example.interfaces.UserRepository;
 import com.example.interfaces.UserService;
 import com.example.models.User;
@@ -12,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserServiceImplTests {
     private UserRepository userRepository;
@@ -69,18 +69,26 @@ public class UserServiceImplTests {
     @Test
     void givenExistingUser_whenUpdate_thenUserIsUpdated() {
         // Arrange
-        User existingUser = new User("Existing", "User", "School", "City", 2020, "Mr. Existing", "existingUser",
+        String originalUsername = "existingUser";
+        User existingUser = new User("Existing", "User", "School", "City", 2020, "Mr. Existing", originalUsername,
                 "oldPassword");
         List<User> users = new ArrayList<>(List.of(existingUser));
         userRepository.saveUsers(users);
-        User updatedUser = new User("Updated", "User", "School", "City", 2020, "Mr. Existing", "existingUser",
+        User updatedUser = new User("Updated", "User", "School", "City", 2020, "Mr. Existing", originalUsername,
                 "updatedPassword");
 
         // Act
-        boolean result = userService.Update(updatedUser);
+        boolean result = userService.update(originalUsername, updatedUser);
 
         // Assert
         Assertions.assertTrue(result);
-        Assertions.assertTrue(users.contains(updatedUser));
+        Optional<User> updatedUserOptional = users.stream().filter(u -> u.getUserName().equals(originalUsername))
+                .findFirst();
+        Assertions.assertTrue(updatedUserOptional.isPresent(), "Updated user should be present in the list");
+        updatedUserOptional.ifPresent(u -> {
+            Assertions.assertEquals("Updated", u.getName(), "Name should be updated");
+            Assertions.assertEquals("updatedPassword", u.getPassword(), "Password should be updated");
+        });
     }
+
 }
