@@ -9,6 +9,7 @@ import com.example.models.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class ModuleServiceImpl implements ModuleService {
 
         return moduleRepository.load().stream()
                 .filter(module -> module.getUsername().equals(authenticatedUser.getUserName()))
+                .sorted(Comparator.comparing(Module::getName))
                 .collect(Collectors.toList());
     }
 
