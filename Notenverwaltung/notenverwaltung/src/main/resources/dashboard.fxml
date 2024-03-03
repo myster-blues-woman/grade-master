@@ -103,7 +103,7 @@
                   </Pane>
                </top>
                <center>
-                  <Pane fx:id="profilePane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <Pane fx:id="profilePane" prefHeight="468.0" prefWidth="720.0" BorderPane.alignment="CENTER">
                      <children>
                         <Text layoutX="29.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="47.693359375">
                            <font>
@@ -159,7 +159,8 @@
                         <TextField fx:id="lehrperson" layoutX="193.0" layoutY="268.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
                         <TextField fx:id="ortDerSchule" layoutX="193.0" layoutY="301.0" onInputMethodTextChanged="#handleTextFieldChange" prefHeight="27.0" prefWidth="172.0" style="-fx-background-color: transparent; -fx-border-color: #8000FF; -fx-border-width: 0px 0px 2px 0px;" />
                         <Button fx:id="deleteButton" layoutX="494.0" layoutY="68.0" mnemonicParsing="false" onAction="#clearFields" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: red;" styleClass="button1" stylesheets="@main.css" text="Löschen" textFill="WHITE" />
-                        <Button disable="true" layoutX="495.0" layoutY="108.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="125.0" styleClass="button1" stylesheets="@main.css" text="Speichern" textFill="WHITE" />
+                        <Button fx:id="saveButton" layoutX="495.0" layoutY="108.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="25.0" prefWidth="125.0" styleClass="button1" stylesheets="@main.css" text="Speichern" textFill="WHITE" />
+                        <Button fx:id="resetPasswort" layoutX="28.0" layoutY="350.0" mnemonicParsing="false" onAction="#onResetPasswortClick" prefHeight="25.0" prefWidth="162.0" styleClass="button2" stylesheets="@main.css" text="Passwort zurück setzen" textFill="WHITE" />
                      </children>
                   </Pane>
                </center>

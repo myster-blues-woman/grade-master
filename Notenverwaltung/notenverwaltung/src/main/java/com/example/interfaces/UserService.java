@@ -14,5 +14,5 @@ public interface UserService {
 
     Optional<User> getUserByUsernameAndPassword(String username, String password);
 
-    boolean Update(User user);
+    boolean update(String originalUsername, User user);
 }

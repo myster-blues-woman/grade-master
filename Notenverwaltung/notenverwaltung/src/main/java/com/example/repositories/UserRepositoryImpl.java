@@ -73,4 +73,24 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateUser(String originalUsername, User updatedUser) {
+        List<User> users = loadUsers(); // Lade die existierenden Benutzer
+
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUserName().equals(originalUsername)) {
+                // Aktualisiere den Benutzer mit den neuen Daten
+                users.set(i, updatedUser);
+                tainted = true;
+                break; // Beende die Schleife, nachdem der Benutzer gefunden und aktualisiert wurde
+            }
+        }
+        System.out.println("Im Repository: Benutzer aktualisiert.");
+        if (tainted) {
+            saveUsers(); // Speichere die aktualisierte Liste von Benutzern
+        }
+    }
+
 }

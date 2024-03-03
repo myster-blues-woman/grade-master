@@ -1,24 +1,23 @@
 package com.example.Controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.models.Grade;
 import com.example.models.Module;
 
 import com.example.exceptions.UnauthorizedException;
 import com.example.services.ModuleServiceImpl;
-import com.example.models.Module;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -33,9 +32,12 @@ public class GradeController {
     private VBox laufendeVBox;
     @FXML
     private Button addGradeButton;
-
+    @FXML
+    private Button backToDashboardButton;
     @FXML
     private ComboBox comboBoxModule;
+    @FXML
+    private Label dropDownError;
 
     private ModuleServiceImpl moduleService;
 
@@ -46,6 +48,7 @@ public class GradeController {
 
     @FXML
     private void initialize() {
+        dropDownError.setVisible(false);
         loadAndDisplayModules();
     }
 
@@ -55,7 +58,7 @@ public class GradeController {
             addModulesToComboBox();
             List<Module> modules = moduleService.getAllModules();
             for (Module module : modules) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gradeModuleItem.fxml")); // Pfad anpassen
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gradeModuleItem.fxml"));
                 Node moduleItem = loader.load();
                 GradeModuleItemController controller = loader.getController();
                 controller.init(module);
@@ -82,24 +85,59 @@ public class GradeController {
     public void addModulesToComboBox() {
         try {
             comboBoxModule.getItems().clear();
-            List<Module> modules = moduleService.getAllModules();
-            comboBoxModule.getItems().addAll(modules);
+            List<Module> allModules = moduleService.getAllModules();
+            List<Module> filteredModules = allModules.stream()
+                    .filter(module -> !module.getStartDate().isAfter(java.time.LocalDate.now()))
+                    .collect(Collectors.toList());
 
+            comboBoxModule.getItems().addAll(filteredModules);
         } catch (UnauthorizedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            showAlert("Fehler", "Autorisierungsfehler beim Laden der Module.", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
     private void addGrade(ActionEvent event) {
         Module module = (Module) comboBoxModule.getSelectionModel().getSelectedItem();
-        Grade grade = new Grade(Double.parseDouble(gradeTextFeld.getText()),
-                Double.parseDouble(weightTextField.getText()),
-                gradeDescriptionTextField.getText());
-        module.getGrades().add(grade);
-        moduleService.save();
-        loadAndDisplayModules();
+        if (module == null) {
+            dropDownError.setVisible(true);
+            dropDownError.setText("Bitte wählen Sie ein Modul aus der Liste.");
+        } else {
+            dropDownError.setVisible(false);
+            try {
+                Grade grade = new Grade(Double.parseDouble(gradeTextFeld.getText()),
+                        Double.parseDouble(weightTextField.getText()),
+                        gradeDescriptionTextField.getText());
+                module.getGrades().add(grade);
+                moduleService.save();
+                loadAndDisplayModules();
+            } catch (NumberFormatException e) {
+                showAlert("Eingabefehler", "Stellen Sie sicher, dass alle Felder korrekt formatiert sind.",
+                        Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    private void showAlert(String title, String content, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    private void switchToDashboard() {
+        try {
+            App.setSceneRoot("dashboard", 941, 620);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSwitchToDashboardClick() {
+        switchToDashboard();
     }
 
 }

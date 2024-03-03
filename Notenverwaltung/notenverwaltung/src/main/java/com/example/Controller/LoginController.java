@@ -38,7 +38,7 @@ public class LoginController {
 
     private void switchToDashboard() {
         try {
-            App.setSceneRoot("dashboard", 917, 609);
+            App.setSceneRoot("dashboard", 941, 620);
         } catch (IOException e) {
             e.printStackTrace();
             loginMessageLabel.setText("Fehler beim Laden des Dashboards.");
