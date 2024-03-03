@@ -33,15 +33,15 @@
 
 .button2 {
     -fx-background-color: #D5CBEB;
-    -fx-background-radius: 5;
+    -fx-background-radius: 1em;
     -fx-text-fill: #371897;
     -fx-border-color: #6F4CBB;
-    -fx-border-radius: 5;
+    -fx-border-radius: 1em;
 }
 
 .button2:hover {
     -fx-text-fill: #E4EEFD;
-    -fx-background-radius: 5;
+    -fx-background-radius: 1em;
 }
 
 .linear-grad {

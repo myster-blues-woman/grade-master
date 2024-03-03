@@ -12,6 +12,7 @@ import com.example.services.test.fakes.InMemoryModuleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ class ModuleServiceImplTest {
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt",
                 "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        Module module = new Module("OOP2", "peter", new ArrayList<>(), new ArrayList<>());
+        Module module = new Module("OOP2", "peter", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
         List<Module> initialModules = moduleRepository.loadModules();
         initialModules.add(module);
         moduleRepository.saveModules(initialModules);
@@ -64,7 +65,7 @@ class ModuleServiceImplTest {
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt",
                 "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        Module module = new Module("OOP2", "ueli", new ArrayList<>(), new ArrayList<>());
+        Module module = new Module("OOP2", "ueli", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
 
         // Act, Assert
         assertThrows(UnauthorizedException.class, () -> moduleService.addModule(module));
@@ -76,7 +77,7 @@ class ModuleServiceImplTest {
         User user = new User("Peter", "Müller", "HFTM", "Grenchen", 2000, "Kurt",
                 "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
-        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>());
+        Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
 
         // Act
         assertDoesNotThrow(() -> moduleService.addModule(module));

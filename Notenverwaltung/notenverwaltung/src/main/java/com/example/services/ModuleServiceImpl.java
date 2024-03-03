@@ -22,9 +22,12 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public List<Module> getAllModules() throws UnauthorizedException {
         User authenticatedUser = authenticatedUserAccessor.getAuthenticatedUser();
-        if (authenticatedUser == null) throw new UnauthorizedException();
+        if (authenticatedUser == null)
+            throw new UnauthorizedException();
 
-        return moduleRepository.loadModules().stream().filter(module -> module.getUsername().equals(authenticatedUser.getUserName())).collect(Collectors.toList());
+        return moduleRepository.loadModules().stream()
+                .filter(module -> module.getUsername().equals(authenticatedUser.getUserName()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -34,6 +37,20 @@ public class ModuleServiceImpl implements ModuleService {
             throw new UnauthorizedException();
 
         moduleRepository.loadModules().add(module);
+        moduleRepository.saveModules();
+    }
+
+    @Override
+    public List<Module> deleteModule(String userName, String name) throws UnauthorizedException {
+        User authenticatedUser = authenticatedUserAccessor.getAuthenticatedUser();
+        if (authenticatedUser == null || !userName.equals(authenticatedUser.getUserName()))
+            throw new UnauthorizedException();
+        List<Module> newModule = moduleRepository.deleteModule(name);
+        return newModule;
+    }
+
+    @Override
+    public void save() {
         moduleRepository.saveModules();
     }
 }

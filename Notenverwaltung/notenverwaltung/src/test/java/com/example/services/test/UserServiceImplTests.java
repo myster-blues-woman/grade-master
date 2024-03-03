@@ -1,5 +1,6 @@
 package com.example.services.test;
 
+import com.example.interfaces.AuthenticatedUserAccessor;
 import com.example.interfaces.UserRepository;
 import com.example.interfaces.UserService;
 import com.example.models.User;
@@ -19,7 +20,7 @@ public class UserServiceImplTests {
     @BeforeEach
     void setUp() {
         userRepository = new InMemoryUserRepository();
-        userService = new UserServiceImpl(userRepository);
+        userService = new UserServiceImpl(userRepository, null);
     }
 
     @Test
@@ -53,7 +54,8 @@ public class UserServiceImplTests {
         String username = "existingUser";
         int jahrgang = 2020;
         String lehrperson = "Mr. Existing";
-        List<User> users = List.of(new User("Existing", "User", "School", "City", jahrgang, lehrperson, username, "oldPassword"));
+        List<User> users = List
+                .of(new User("Existing", "User", "School", "City", jahrgang, lehrperson, username, "oldPassword"));
         userRepository.saveUsers(users);
 
         // Act
@@ -67,10 +69,12 @@ public class UserServiceImplTests {
     @Test
     void givenExistingUser_whenUpdate_thenUserIsUpdated() {
         // Arrange
-        User existingUser = new User("Existing", "User", "School", "City", 2020, "Mr. Existing", "existingUser", "oldPassword");
+        User existingUser = new User("Existing", "User", "School", "City", 2020, "Mr. Existing", "existingUser",
+                "oldPassword");
         List<User> users = new ArrayList<>(List.of(existingUser));
         userRepository.saveUsers(users);
-        User updatedUser = new User("Updated", "User", "School", "City", 2020, "Mr. Existing", "existingUser", "updatedPassword");
+        User updatedUser = new User("Updated", "User", "School", "City", 2020, "Mr. Existing", "existingUser",
+                "updatedPassword");
 
         // Act
         boolean result = userService.Update(updatedUser);

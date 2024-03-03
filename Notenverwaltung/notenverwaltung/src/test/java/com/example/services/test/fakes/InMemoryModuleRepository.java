@@ -24,4 +24,10 @@ public class InMemoryModuleRepository implements ModuleRepository {
     public void saveModules() {
         // Do nothingg
     }
+
+    @Override
+    public List<Module> deleteModule(String name) {
+        return modules;
+        // Do nothingg
+    }
 }

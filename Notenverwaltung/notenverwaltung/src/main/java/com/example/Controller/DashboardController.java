@@ -1,8 +1,10 @@
 package com.example.Controller;
 
-import com.example.interfaces.UserService;
+import java.io.IOException;
+
+import com.example.interfaces.AuthenticatedUserAccessor;
 import com.example.models.User;
-import com.example.services.UserServiceImpl;
+import com.example.services.AuthenticatedUserAccessorImpl;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,33 +37,27 @@ public class DashboardController {
     @FXML
     private Text profileLabel;
 
-    private UserService userService;
+    private AuthenticatedUserAccessor authenticatedUserAccessor;
 
     private User currentUser;
 
     public DashboardController() {
-        this.userService = new UserServiceImpl(App.getUserRepositorySingleton());
+        this.authenticatedUserAccessor = App.getAuthenticatedUserAccessorSingleton();
     }
 
-    public void initializeWithCredentials(String username, String password) {
-        userService.getUserByUsernameAndPassword(username, password).ifPresent(user -> {
-            name.setText(user.getName());
-            vorname.setText(user.getVorname());
-            schule.setText(user.getSchule());
-            ortDerSchule.setText(user.getOrtDerSchule());
-            jahrgang.setText(String.valueOf(user.getJahrgang()));
-            lehrperson.setText(user.getLehrperson());
-            userName.setText(user.getUserName());
-
-            currentUser = new User(
-                    user.getName(),
-                    user.getVorname(),
-                    user.getSchule(),
-                    user.getOrtDerSchule(),
-                    user.getJahrgang(),
-                    user.getLehrperson(),
-                    user.getUserName());
-        });
+    @FXML
+    private void initialize() {
+        currentUser = authenticatedUserAccessor.getAuthenticatedUser();
+        if (currentUser != null) {
+            System.out.println(currentUser);
+            name.setText(currentUser.getName());
+            vorname.setText(currentUser.getVorname());
+            schule.setText(currentUser.getSchule());
+            ortDerSchule.setText(currentUser.getOrtDerSchule());
+            jahrgang.setText(String.valueOf(currentUser.getJahrgang()));
+            lehrperson.setText(currentUser.getLehrperson());
+            userName.setText(currentUser.getUserName());
+        }
     }
 
     @FXML
@@ -71,15 +67,17 @@ public class DashboardController {
     }
 
     @FXML
-    private void onModuleNavButtonClick() {
+    private void onModuleNavButtonClick() throws IOException {
         profilePane.setVisible(false);
         profileLabel.setVisible(false);
+        App.setSceneRoot("module", 1049, 594);
     }
 
     @FXML
-    private void onNotenVltNavButtonClick() {
+    private void onNotenVltNavButtonClick() throws IOException {
         profilePane.setVisible(false);
         profileLabel.setVisible(false);
+        App.setSceneRoot("grades", 1049, 594);
     }
 
     @FXML

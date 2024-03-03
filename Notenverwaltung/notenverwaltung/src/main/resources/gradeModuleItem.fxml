@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="520.0" style="-fx-background-color: #989AAD;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.Controller.GradeModuleItemController">
+    <padding>
+        <Insets left="10.0" right="10.0" />
+    </padding>
+    <left>
+        <Label fx:id="moduleNameLabel" text="Label" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Dubai Light" size="27.0" />
+            </font>
+        </Label>
+    </left>
+   <center>
+      <Label text="Durchschnitt:" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="200.0" />
+         </padding>
+      </Label>
+   </center>
+   <right>
+      <Label fx:id="avgLabel" text="Label" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
