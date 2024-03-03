@@ -4,12 +4,12 @@ import com.example.models.Module;
 
 import java.util.List;
 
-public interface ModuleRepository {
-    List<Module> loadModules();
+public interface ModuleRepository extends BaseRepository<Module> {
+    List<Module> load();
 
-    void saveModules(List<Module> modules);
+    void save(List<Module> modules);
 
-    void saveModules();
+    void save();
 
     List<Module> deleteModule(String name);
 }

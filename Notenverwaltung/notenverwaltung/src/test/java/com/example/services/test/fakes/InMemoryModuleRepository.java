@@ -12,30 +12,30 @@ public class InMemoryModuleRepository implements ModuleRepository {
     private List<Module> modules = new ArrayList<>();
 
     @Override
-    public List<Module> loadModules() {
+    public List<Module> load() {
         return modules;
     }
 
     @Override
-    public void saveModules(List<Module> modules) {
+    public void save(List<Module> modules) {
         // Stellt sicher, dass `this.modules` eine neue Instanz von ArrayList ist,
         // die die übergebenen Module enthält.
         this.modules = new ArrayList<>(modules);
     }
 
     @Override
-    public void saveModules() {
+    public void save() {
         // Do nothingg
     }
 
     @Override
     public List<Module> deleteModule(String moduleName) {
-        List<Module> mutableModules = new ArrayList<>(loadModules());
+        List<Module> mutableModules = new ArrayList<>(load());
 
         boolean removed = mutableModules.removeIf(module -> module.getName().equals(moduleName));
 
         if (removed) {
-            saveModules(mutableModules);
+            save(mutableModules);
         }
 
         return mutableModules;

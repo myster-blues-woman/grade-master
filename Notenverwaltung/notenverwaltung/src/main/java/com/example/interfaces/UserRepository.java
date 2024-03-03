@@ -4,12 +4,11 @@ import com.example.models.User;
 
 import java.util.List;
 
-public interface UserRepository {
-    List<User> loadUsers();
+public interface UserRepository extends BaseRepository<User> {
+    List<User> load();
 
-    void saveUsers(List<User> users);
+    void save(List<User> users);
 
-    void saveUsers();
-
+    void save();
     void updateUser(String originalUsername, User updatedUser);
 }

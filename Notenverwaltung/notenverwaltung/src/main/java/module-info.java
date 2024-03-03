@@ -4,6 +4,8 @@ module com.example {
     requires transitive javafx.graphics;
     requires javafx.controls;
     requires javafx.fxml;
+    requires log4j.api;
+    requires log4j.core;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.core;

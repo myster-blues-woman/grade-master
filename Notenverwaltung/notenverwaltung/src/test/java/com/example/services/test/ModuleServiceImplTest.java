@@ -46,9 +46,9 @@ class ModuleServiceImplTest {
                 "peter", "1234");
         authenticatedUserAccessor.setAuthenticatedUser(user);
         Module module = new Module("OOP2", "peter", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
-        List<Module> initialModules = moduleRepository.loadModules();
+        List<Module> initialModules = moduleRepository.load();
         initialModules.add(module);
-        moduleRepository.saveModules(initialModules);
+        moduleRepository.save(initialModules);
 
         // Act
         List<Module> modules = moduleService.getAllModules();
@@ -98,7 +98,7 @@ class ModuleServiceImplTest {
         Module module1 = new Module("OOP1", userName, new ArrayList<>(), new ArrayList<>(),
                 LocalDate.now().minusDays(1));
         Module module2 = new Module("OOP2", userName, new ArrayList<>(), new ArrayList<>(), LocalDate.now());
-        moduleRepository.saveModules(List.of(module1, module2));
+        moduleRepository.save(List.of(module1, module2));
 
         assertEquals(2, moduleService.getAllModules().size());
 
@@ -120,7 +120,7 @@ class ModuleServiceImplTest {
 
         Module module = new Module("OOP1", userName, new ArrayList<>(), new ArrayList<>(),
                 LocalDate.now().minusDays(1));
-        moduleRepository.saveModules(List.of(module));
+        moduleRepository.save(List.of(module));
 
         assertEquals(1, moduleService.getAllModules().size());
 

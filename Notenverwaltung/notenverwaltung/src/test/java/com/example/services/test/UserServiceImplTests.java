@@ -1,5 +1,6 @@
 package com.example.services.test;
 
+import com.example.interfaces.AuthenticatedUserAccessor;
 import com.example.interfaces.UserRepository;
 import com.example.interfaces.UserService;
 import com.example.models.User;
@@ -56,7 +57,7 @@ public class UserServiceImplTests {
         String lehrperson = "Mr. Existing";
         List<User> users = List
                 .of(new User("Existing", "User", "School", "City", jahrgang, lehrperson, username, "oldPassword"));
-        userRepository.saveUsers(users);
+        userRepository.save(users);
 
         // Act
         boolean result = userService.resetPassword(username, jahrgang, lehrperson, "newPassword");
@@ -73,7 +74,7 @@ public class UserServiceImplTests {
         User existingUser = new User("Existing", "User", "School", "City", 2020, "Mr. Existing", originalUsername,
                 "oldPassword");
         List<User> users = new ArrayList<>(List.of(existingUser));
-        userRepository.saveUsers(users);
+        userRepository.save(users);
         User updatedUser = new User("Updated", "User", "School", "City", 2020, "Mr. Existing", originalUsername,
                 "updatedPassword");
 
