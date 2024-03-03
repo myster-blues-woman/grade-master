@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -23,12 +25,15 @@ public class App extends Application {
     private static UserRepository userRepository;
     private static AuthenticatedUserAccessorImpl authenticatedUserAccessor;
 
+    private static Logger logger = LogManager.getLogger(App.class);
+
     public static void main(String[] args) {
         launch();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
+        logger.info("Starting grade master");
         scene = new Scene(loadFXML("login"), 836, 456);
         stage.setScene(scene);
         stage.setResizable(false);

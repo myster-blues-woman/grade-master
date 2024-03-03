@@ -23,7 +23,7 @@ public class ModuleRepositoryImpl implements ModuleRepository {
     }
 
     @Override
-    public List<Module> loadModules() {
+    public List<Module> load() {
         if (!tainted && modules != null)
             return modules;
 
@@ -57,7 +57,7 @@ public class ModuleRepositoryImpl implements ModuleRepository {
     }
 
     @Override
-    public void saveModules() {
+    public void save() {
         try {
             mapper.writeValue(new File(jsonFilePath), modules);
             tainted = true;
@@ -67,7 +67,7 @@ public class ModuleRepositoryImpl implements ModuleRepository {
     }
 
     @Override
-    public void saveModules(List<Module> modules) {
+    public void save(List<Module> modules) {
         try {
             mapper.writeValue(new File(jsonFilePath), modules);
             tainted = true;
@@ -78,14 +78,14 @@ public class ModuleRepositoryImpl implements ModuleRepository {
 
     @Override
     public List<Module> deleteModule(String moduleName) {
-        List<Module> currentModules = loadModules();
+        List<Module> currentModules = load();
         if (currentModules == null) {
             return Collections.emptyList();
         }
         boolean removed = currentModules.removeIf(module -> module.getName().equals(moduleName));
 
         if (removed) {
-            saveModules(currentModules);
+            save(currentModules);
             tainted = true;
         }
         return currentModules;

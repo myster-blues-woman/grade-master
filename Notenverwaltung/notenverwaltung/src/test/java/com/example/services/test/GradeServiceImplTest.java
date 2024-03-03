@@ -91,7 +91,7 @@ public class GradeServiceImplTest {
         authenticatedUserAccessor.setAuthenticatedUser(user);
         List<Module> modules = List
                 .of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(6, 1, "test")), LocalDate.now()));
-        moduleRepository.saveModules(modules);
+        moduleRepository.save(modules);
 
         // Act
         assertDoesNotThrow(() -> gradeService.exportGradesToExcel(fileName));
@@ -109,7 +109,7 @@ public class GradeServiceImplTest {
         List<Module> modules = List
                 .of(new Module("OOP2", "peter", new ArrayList<>(), List.of(new Grade(5.0, 1.0, "Test")),
                         LocalDate.now()));
-        moduleRepository.saveModules(modules);
+        moduleRepository.save(modules);
 
         // Act
         List<Grade> grades = gradeService.getAllGrades();
@@ -128,7 +128,7 @@ public class GradeServiceImplTest {
         Module module = new Module("OOP1", "peter", new ArrayList<>(), new ArrayList<>(), LocalDate.now());
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(module);
-        moduleRepository.saveModules(modules);
+        moduleRepository.save(modules);
         Grade grade = new Grade(5.5, 1.0, "test");
 
         // Act
@@ -149,7 +149,7 @@ public class GradeServiceImplTest {
                 LocalDate.now());
         ArrayList<Module> modules = new ArrayList<>();
         modules.add(module);
-        moduleRepository.saveModules(modules);
+        moduleRepository.save(modules);
 
         // Act
         assertDoesNotThrow(() -> gradeService.removeGrade(grade));

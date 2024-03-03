@@ -10,17 +10,17 @@ public class InMemoryUserRepository implements UserRepository {
     private List<User> users = new ArrayList<>();
 
     @Override
-    public List<User> loadUsers() {
+    public List<User> load() {
         return users;
     }
 
     @Override
-    public void saveUsers(List<User> users) {
+    public void save(List<User> users) {
         this.users = users;
     }
 
     @Override
-    public void saveUsers() {
+    public void save() {
         // Do nothing
     }
 

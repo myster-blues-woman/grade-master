@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository {
     private List<User> users;
 
     @Override
-    public List<User> loadUsers() {
+    public List<User> load() {
         if (!tainted && users != null)
             return users;
 
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void saveUsers(List<User> users) {
+    public void save(List<User> users) {
         try {
             mapper.writeValue(new File(jsonFilePath), users);
             tainted = true;
@@ -64,7 +64,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void saveUsers() {
+    public void save() {
         try {
             mapper.writeValue(new File(jsonFilePath), users);
             tainted = true;
@@ -75,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void updateUser(String originalUsername, User updatedUser) {
-        List<User> users = loadUsers();
+        List<User> users = load();
 
         int userIndex = -1;
         for (int i = 0; i < users.size(); i++) {
@@ -99,7 +99,7 @@ public class UserRepositoryImpl implements UserRepository {
             users.set(userIndex, updatedUser);
             tainted = true;
             System.out.println("Im Repository: Benutzer aktualisiert.");
-            saveUsers();
+            save();
         } else {
             System.out.println("Kein Benutzer mit dem Benutzernamen " + originalUsername + " gefunden.");
         }
